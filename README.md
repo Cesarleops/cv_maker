@@ -1,4 +1,4 @@
-Curriculumn Manager
+Curriculum Manager
 
 The idea for this project came to my mind when I was searching for jobs, I am Colombian
 so I am applying to local and remote jobs,it is pretty boring having to translate my cv, making changes, updating it and then downloading it again.
