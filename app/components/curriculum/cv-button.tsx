@@ -7,6 +7,7 @@ interface Props {
   icon: React.ReactNode;
 }
 export const CvButton = ({ title, icon }: Props) => {
+  console.info("ti", title);
   return (
     <div className="absolute bottom-3 right-3">
       <Link href={`/home/${title}`}>

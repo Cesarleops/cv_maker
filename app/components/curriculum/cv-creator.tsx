@@ -1,11 +1,9 @@
-"use client";
-
 import { CvSection } from "./cv-section";
 import { AppInput } from "../ui/input";
-
-import { CvIcons } from "./cv-icons";
+import { CvIcons } from "../ui/cv-icons";
 
 export const CvCreator = () => {
+  console.log("que pasa chavales");
   return (
     <main className="relative w-[898px] h-[508px] grid grid-cols-3 grid-rows-3 gap-8">
       <CvSection

@@ -5,7 +5,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const AppButton = ({ text, ...props }: Props) => {
   return (
     <button
-      className="bg-primary text-white rounded-xl h-10 w-[200px]"
+      className="bg-primary text-white rounded-xl h-10 w-[150px]"
       {...props}
     >
       {text}
