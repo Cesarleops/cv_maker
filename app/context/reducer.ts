@@ -1,7 +1,7 @@
 import { State } from "@/types";
 
 type Actions = {
-  type: "addData" | "removeData";
+  type: "description" | "listedInfo";
   payload: {
     cvSection: string;
     data: string;
@@ -9,9 +9,14 @@ type Actions = {
 };
 
 export const cvReducer = (state: State, action: Actions) => {
-  if (action.type === "addData") {
+  if (action.type === "description") {
+    return {
+      ...state,
+      [action.payload.cvSection]: action.payload.data,
+    };
+  }
+  if (action.type === "listedInfo") {
     console.log("ac", action);
-    console.log(action.payload.cvSection);
     return {
       ...state,
       [action.payload.cvSection]: [

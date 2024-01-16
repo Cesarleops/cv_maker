@@ -1,4 +1,4 @@
-import { CvCreator } from "../components/curriculum/cv-creator";
+import { CvCreator } from "../components/curriculum/ui/cv-creator";
 
 export default function HomePage() {
   return (
