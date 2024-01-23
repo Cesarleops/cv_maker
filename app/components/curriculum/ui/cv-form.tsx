@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CvIcons } from "../../ui/cv-icons";
+import { CvIcons } from "./cv-icons";
+import { adjustedTitle } from "@/app/lib/helpers";
 
 interface Props {
   children: React.ReactNode;
@@ -7,17 +8,11 @@ interface Props {
   subtitle: string;
 }
 export const CvInfoForm = ({ children, title, subtitle }: Props) => {
-  const adjustedTitle = (title: string) => {
-    const newTitle = title[0].toLocaleUpperCase() + title.slice(1);
-    return newTitle;
-  };
-
-  console.log(adjustedTitle(title));
   return (
-    <section className="flex flex-col min-h-[300px] min-w-[300px] border-2 border-terciary rounded-2xl p-5 gap-4">
+    <section className="flex flex-col min-h-[300px] min-w-[300px] border-2 border-sections rounded-2xl p-5 gap-4">
       <header className="flex justify-between items-center">
         <div>
-          <h4 className="text-primary font-bold text-xl">
+          <h4 className="text-titles font-bold text-xl">
             {adjustedTitle(title)}
           </h4>
           <p className="text-secondary text-sm">{subtitle}</p>

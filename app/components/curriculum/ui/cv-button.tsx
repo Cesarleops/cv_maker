@@ -7,13 +7,16 @@ interface Props {
   icon: React.ReactNode;
 }
 export const CvButton = ({ title, icon }: Props) => {
-  console.info("ti", title);
   return (
-    <div className="absolute bottom-3 right-3">
+    <div className="absolute  rounded-full right-5 top-5">
       <Link href={`/home/${title.toLocaleLowerCase()}`}>
-        <button className="bg-[#fbfdf7] cursor-auto p-2 rounded-full shadow-md hover:scale-105 hover:border-black hover:border-[1px] hover:border-solid transition-colors duration-100 ">
-          {icon}
-        </button>
+        {icon ? (
+          <div className="relative">
+            <button className="relative bg-[#262626] cursor-auto p-2 rounded-full transition-colors duration-150 group-hover:bg-lime-400 ">
+              {icon}
+            </button>
+          </div>
+        ) : null}
       </Link>
     </div>
   );

@@ -9,11 +9,15 @@ interface ContextProps {
   dispatch: React.Dispatch<any>;
 }
 const initialState = {
+  name: "",
+  location: "",
   introduction: "",
   about: "",
   skills: [],
   links: [],
   experience: [],
+  education: [],
+  projects: [],
 };
 
 const CvContext = createContext({} as ContextProps);

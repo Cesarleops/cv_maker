@@ -13,6 +13,16 @@ export const useCv = (
   const inputs = Array.from(args);
   const { dispatch } = useCvContext();
 
+  // const handleProjectTechStack = (stack: string[]) => {
+  //   console.log("stack", stack);
+
+  //   dispatch({
+  //     type: "addStack",
+  //     payload: {
+  //       data: stack,
+  //     },
+  //   });
+  // };
   useEffect(() => {
     if (formState !== null && inputs) {
       dispatch({
@@ -34,5 +44,6 @@ export const useCv = (
   return {
     formState,
     formAction,
+    // handleProjectTechStack,
   };
 };

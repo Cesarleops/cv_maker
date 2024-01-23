@@ -16,17 +16,20 @@ export const CvSection = ({
 }: Props) => {
   return (
     <section
-      className={`relative flex flex-col justify-between  bg-[#f5f5f5]  w-[278px] p-5 rounded-[10px] ${className} `}
+      className={`relative group flex flex-col justify-between bg-sections  w-[278px] p-5 rounded-[10px] gap-3 ${className} `}
     >
       <div>
-        <p className="text-lg">{title}</p>
-        <p className="text-secondary text-sm">{subtitle}</p>
+        <p className="text-lg font-semibold text-titles pointer-events-none">
+          {title}
+        </p>
+        <p className="text-secondary text-sm text-pretty max-w-[170px]">
+          {subtitle}
+        </p>
       </div>
 
       {children}
-      {!(title === "Whats your name ?") ? (
-        <CvButton title={title} icon={icon} />
-      ) : null}
+
+      <CvButton title={title} icon={icon} />
     </section>
   );
 };

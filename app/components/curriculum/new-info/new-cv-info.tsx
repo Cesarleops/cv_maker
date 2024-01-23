@@ -2,10 +2,16 @@
 import { useCvContext } from "@/app/context/store";
 import { DescriptionType } from "./description";
 import { ExperienceType } from "./experience";
+import { LinksType } from "./links";
+import { ProjectsType } from "./projects";
+import { SkillsType } from "./skills";
+import { EducationType } from "./education";
 
-export const NewCvInfo = ({ section }: any) => {
+export const NewCvInfo = ({ section }: { section: string }) => {
   const { cvData } = useCvContext();
-  console.log(cvData);
+
+  if (section === "education")
+    return <EducationType academies={cvData.education} />;
   if (section === "about" || section === "introduction") {
     return (
       <DescriptionType
@@ -14,29 +20,11 @@ export const NewCvInfo = ({ section }: any) => {
       />
     );
   }
-
-  if (section === "experience") {
+  if (section === "projects")
+    return <ProjectsType projects={cvData.projects} />;
+  if (section === "skills") return <SkillsType skills={cvData.skills} />;
+  if (section === "experience")
     return <ExperienceType experience={cvData.experience} />;
-  }
-  return (
-    <div
-      className="flex flex-col justify-center p-5
-              min-w-[500px] h-[80px] border-solid border-2 rounded-xl 
-              bg-terciary text-primary shadow-sm"
-    >
-      <p className="text-xl font-bold">Links</p>
 
-      <ul className="flex gap-4 items-center">
-        {cvData.links.map((link) => (
-          <li
-            className={`
-            animate-appear`}
-            key={link}
-          >
-            {link}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <LinksType links={cvData.links} />;
 };

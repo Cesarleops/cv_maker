@@ -5,5 +5,9 @@ export default function DetailedCvSection({
 }: {
   params: { section: string };
 }) {
-  return <CvEditing params={params} />;
+  return (
+    <section className="h-screen bg-primary px-10">
+      <CvEditing params={params} />
+    </section>
+  );
 }

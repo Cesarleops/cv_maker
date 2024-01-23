@@ -16,10 +16,10 @@ export const ExperienceForm = () => {
   return (
     <section>
       <form className="flex flex-col gap-3" action={formAction}>
-        <fieldset className="flex gap-40">
+        <fieldset className="flex gap-40 ">
           <div className="flex flex-col gap-5">
-            <label className="flex flex-col gap-2 font-bold">
-              The company
+            <label className="flex flex-col gap-2  font-bold">
+              <p className="text-titles">The company</p>
               <AppInput
                 type="text"
                 placeholder="vercel"
@@ -30,7 +30,7 @@ export const ExperienceForm = () => {
             </label>
 
             <label className="flex flex-col gap-2 font-bold">
-              The role
+              <p className="text-titles">The role</p>
               <AppInput
                 type="text"
                 placeholder="Solutions engineer"
@@ -40,26 +40,16 @@ export const ExperienceForm = () => {
               />
             </label>
           </div>
-          {/* <div className="flex h-6 gap-5">
-            <select>
-              <option value="2020">2020</option>
-              <option value="2021" selected>
-                2021
-              </option>
-              <option value="2023">2023</option>
-            </select>
-            <span>-</span>
-            <select>
-              <option value="2020">2020</option>
-              <option value="2021" selected>
-                2021
-              </option>
-              <option value="2023">2023</option>
-            </select>
-          </div> */}
+          <div className="flex flex-col gap-2 h-4 items-center align-top">
+            <p className="font-bold self-start text-titles">Your time there</p>
+            <fieldset className="flex gap-4 items-center text-titles">
+              <AppInput placeholder="2020" className="w-20 p-2" />-
+              <AppInput placeholder="2024" className="w-20 p-2" />
+            </fieldset>
+          </div>
         </fieldset>
         <div className="flex flex-col gap-2">
-          <p className="font-bold">Describe your time there</p>
+          <p className="font-bold text-titles ">Describe your experience</p>
           <textarea
             ref={inputDescriptionRef}
             name="description"

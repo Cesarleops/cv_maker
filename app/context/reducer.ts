@@ -16,13 +16,11 @@ export const cvReducer = (state: State, action: Actions) => {
     };
   }
   if (action.type === "listedInfo") {
-    console.log("ac", action);
+    const currentList = Array.from(state[action.payload.cvSection]);
+    console.log("pa", action.payload.data);
     return {
       ...state,
-      [action.payload.cvSection]: [
-        ...state[action.payload.cvSection],
-        action.payload.data,
-      ],
+      [action.payload.cvSection]: [...currentList, action.payload.data],
     };
   }
 

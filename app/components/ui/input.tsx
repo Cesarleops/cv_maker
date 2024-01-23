@@ -8,7 +8,7 @@ export const AppInput = forwardRef(function AppInput(
 ) {
   return (
     <input
-      className={`border-[#ecedee] p-2 border-solid border-2 rounded-xl ${className} placeholder:text-sm placeholder:text-secondary `}
+      className={`text-sections p-2 rounded-xl ${className} placeholder:text-sm placeholder:text-secondary `}
       {...props}
       ref={ref}
     />
