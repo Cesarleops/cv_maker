@@ -12,15 +12,15 @@ export const EducationType = ({
     <CvPreviewCard preview={preview}>
       <p className="text-xl font-bold">Education</p>
       <article>
-        {academies.map((academy) => (
-          <div key={academy.name}>
+        {academies.map(({ academy, title, endDate, startDate }) => (
+          <div key={academy}>
             <div className="flex items-center ">
-              <p className="font-semibold leading-none mr-auto">
-                {academy.name}
+              <p className="font-semibold leading-none mr-auto">{academy}</p>
+              <p className="tabular-nums text-gray-500">
+                {startDate} - {endDate}
               </p>
-              <p className="tabular-nums text-gray-500">{academy.longevity}</p>
             </div>
-            <p className="text-gray-500">{academy.description}</p>
+            <p className="text-gray-500">{title}</p>
           </div>
         ))}
       </article>

@@ -11,7 +11,9 @@ export const DescriptionType = ({
 }) => {
   return (
     <CvPreviewCard preview={preview}>
-      <p className="text-xl font-bold">{type === "about" ? "About" : ""}</p>
+      <p className="text-xl font-bold">
+        {type === "about" ? "About" : preview ? "" : "Introduction"}
+      </p>
       <p className="text-pretty font-mono text-sm  text-gray-500 mt-2 max-w-xl">
         {text}
       </p>

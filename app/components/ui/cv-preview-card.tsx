@@ -1,3 +1,5 @@
+import { cn } from "@/app/lib/utils";
+
 export const CvPreviewCard = ({
   children,
   className,
@@ -9,11 +11,10 @@ export const CvPreviewCard = ({
 }) => {
   return (
     <section
-      className={`${
-        preview
-          ? "rounded-none shadow-none px-0 py-0 w-auto "
-          : " shadow-md px-10 py-5  rounded-xl w-1/2 "
-      } bg-titles ${className}`}
+      className={cn("bg-[#ffffff]", className, {
+        "rounded-none shadow-none px-0 py-0 w-auto ": preview,
+        "shadow-md px-10 py-5 w-full rounded-xl sm:w-1/2 ": !preview,
+      })}
     >
       {children}
     </section>

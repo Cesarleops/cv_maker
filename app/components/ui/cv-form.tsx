@@ -9,7 +9,7 @@ interface Props {
 }
 export const CvInfoForm = ({ children, title, subtitle }: Props) => {
   return (
-    <section className="flex flex-col min-h-[300px] min-w-[300px] border-2 border-sections rounded-2xl p-5 gap-4">
+    <section className="flex flex-col min-h-fit w-full sm:w-1/2 border-2 border-sections rounded-2xl p-5 gap-4">
       <header className="flex justify-between items-center">
         <div>
           <h4 className="text-titles font-bold text-xl">

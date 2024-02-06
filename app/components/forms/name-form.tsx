@@ -2,8 +2,8 @@
 import { useCv } from "@/app/hooks/useCv";
 import { addName } from "@/app/lib/actions";
 import { useRef } from "react";
-import { AppButton } from "../../ui/button";
-import { AppInput } from "../../ui/input";
+import { AppButton } from "../ui/button";
+import { AppInput } from "../ui/input";
 import { useCvContext } from "@/app/context/store";
 
 export const NameForm = () => {
@@ -28,9 +28,19 @@ export const NameForm = () => {
           className="w-11/12"
           ref={nameInput}
           name="name"
+          aria-describedby="name-error"
         />
+
         <AppButton text="+" />
       </form>
+      <div id="name-error" aria-atomic={true} aria-live="polite">
+        {formState.errors?.name &&
+          formState.errors.name.map((error: string) => (
+            <p className="mt-2 text-sm text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
+      </div>
     </section>
   );
 };

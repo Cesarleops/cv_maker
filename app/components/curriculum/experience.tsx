@@ -18,7 +18,9 @@ export const ExperienceType = ({
               <p className="font-bold text-sections">{exp.company}</p>
               <p className="text-md font-mono text-sections">{exp.role}</p>
             </div>
-            <p className="tabular-nums text-gray-500">{exp.longevity}</p>
+            <p className="tabular-nums text-gray-500">
+              {exp.startDate} - {exp.endDate}
+            </p>
           </header>
           <p className="font-normal text-normal text-gray-500">
             {exp.description}

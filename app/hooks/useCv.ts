@@ -2,29 +2,20 @@
 import { RefObject, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { useCvContext } from "../context/store";
+import { errorsState } from "../lib/actions";
 
 export const useCv = (
   typeOfPayload: string,
   formFunction: any,
   cvField: string,
-  ...args: RefObject<HTMLInputElement>[]
+  ...args: RefObject<HTMLInputElement | HTMLTextAreaElement>[]
 ) => {
-  const [formState, formAction] = useFormState(formFunction, null);
+  const initialState: errorsState = { message: null, errors: {} };
+  const [formState, formAction] = useFormState(formFunction, initialState);
   const inputs = Array.from(args);
   const { dispatch } = useCvContext();
-
-  // const handleProjectTechStack = (stack: string[]) => {
-  //   console.log("stack", stack);
-
-  //   dispatch({
-  //     type: "addStack",
-  //     payload: {
-  //       data: stack,
-  //     },
-  //   });
-  // };
   useEffect(() => {
-    if (formState !== null && inputs) {
+    if (!formState.errors && inputs) {
       dispatch({
         type: typeOfPayload,
         payload: {
@@ -44,6 +35,5 @@ export const useCv = (
   return {
     formState,
     formAction,
-    // handleProjectTechStack,
   };
 };

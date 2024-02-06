@@ -15,7 +15,9 @@ export const SkillsType = ({
         {skills.map((skill) => (
           <li
             className={`
-      animate-appear bg-sections p-3 text-titles rounded-lg font-semibold`}
+      ${
+        preview ? "" : "animate-appear"
+      }  rounded-lg border-[1px] border-solid  border-[#e5e7eb] p-2`}
             key={skill}
           >
             {skill}

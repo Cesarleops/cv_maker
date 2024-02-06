@@ -1,4 +1,4 @@
-type iconProps = React.HTMLAttributes<SVGElement>;
+export type iconProps = React.HTMLAttributes<SVGElement>;
 export const Icons = {
   menu: (props: iconProps) => (
     <svg
@@ -43,28 +43,21 @@ export const Icons = {
       ></path>
     </svg>
   ),
-  email: () => (
+  email: (props: iconProps) => (
     <svg
-      width="24px"
-      height="24px"
-      strokeWidth="1.5"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      color="#000000"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
     >
-      <path
-        d="M7 9L12 12.5L17 9"
-        stroke="#000000"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      ></path>
-      <path
-        d="M2 17V7C2 5.89543 2.89543 5 4 5H20C21.1046 5 22 5.89543 22 7V17C22 18.1046 21.1046 19 20 19H4C2.89543 19 2 18.1046 2 17Z"
-        stroke="#000000"
-        strokeWidth="1.5"
-      ></path>
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
     </svg>
   ),
 

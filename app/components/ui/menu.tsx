@@ -41,7 +41,7 @@ export const Menu = () => {
               </svg>
             </button>
           </Link>
-          <Link href="home/signup">
+          <Link href="/api/auth/signin">
             <button className="animate-appear duration-500 p-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

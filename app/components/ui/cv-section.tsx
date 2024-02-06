@@ -1,3 +1,4 @@
+import { cn } from "@/app/lib/utils";
 import { CvButton } from "./cv-button";
 
 interface Props {
@@ -16,7 +17,10 @@ export const CvSection = ({
 }: Props) => {
   return (
     <section
-      className={`relative group flex flex-col justify-between bg-sections  w-[278px] p-5 rounded-[10px] gap-3 ${className} `}
+      className={cn(
+        "relative group flex flex-col  bg-sections  w-[278px] p-5 rounded-[10px] gap-5",
+        className
+      )}
     >
       <div>
         <p className="text-lg font-semibold text-titles pointer-events-none">

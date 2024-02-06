@@ -6,7 +6,7 @@ export default function DetailedCvSection({
   params: { section: string };
 }) {
   return (
-    <section className="h-screen bg-primary px-10">
+    <section className="w-screen h-screen flex flex-col items-center justify-center gap-10  bg-primary px-10">
       <CvEditing params={params} />
     </section>
   );

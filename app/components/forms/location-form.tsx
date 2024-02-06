@@ -1,7 +1,7 @@
 "use client";
 import { useCv } from "@/app/hooks/useCv";
-import { AppButton } from "../../ui/button";
-import { AppInput } from "../../ui/input";
+import { AppButton } from "../ui/button";
+import { AppInput } from "../ui/input";
 import { useRef } from "react";
 import { addLocation } from "@/app/lib/actions";
 import { useCvContext } from "@/app/context/store";
@@ -28,9 +28,19 @@ export const LocationForm = () => {
           className="w-11/12"
           ref={locationInput}
           name="location"
+          aria-describedby="location-error"
         />
+
         <AppButton text="+" />
       </form>
+      <div id="location-error" aria-atomic={true} aria-live="polite">
+        {formState.errors?.location &&
+          formState.errors.location.map((error: string) => (
+            <p className="mt-2 text-sm text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
+      </div>
     </section>
   );
 };

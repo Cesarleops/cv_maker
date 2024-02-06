@@ -17,7 +17,6 @@ export const cvReducer = (state: State, action: Actions) => {
   }
   if (action.type === "listedInfo") {
     const currentList = Array.from(state[action.payload.cvSection]);
-    console.log("pa", action.payload.data);
     return {
       ...state,
       [action.payload.cvSection]: [...currentList, action.payload.data],

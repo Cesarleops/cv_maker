@@ -1,6 +1,6 @@
-import { CvInfoForm } from "@/app/components/curriculum/ui/cv-form";
-import { CvForms } from "@/app/components/curriculum/forms/cv-forms";
-import { NewCvInfo } from "./new-info/new-cv-info";
+import { CvInfoForm } from "@/app/components/ui/cv-form";
+import { CvForms } from "@/app/components/forms/cv-forms";
+import { NewCvInfo } from "./new-cv-info";
 import { subtitle } from "@/app/lib/helpers";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 
 export const CvEditing = ({ params }: Props) => {
   return (
-    <section className="pt-60 flex justify-center items-start gap-10 ">
+    <section className="w-screen flex flex-col sm:flex-row gap-10 px-10">
       <NewCvInfo section={params.section} />
       <CvInfoForm title={params.section} subtitle={subtitle(params.section)}>
         <CvForms section={params.section} />
