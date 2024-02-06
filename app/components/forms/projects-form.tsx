@@ -18,26 +18,40 @@ export const ProjectsForm = () => {
     projectNameInput
   );
   const [projectStackInput, setProjectStackInput] = useState("");
-  console.log(techStack);
+  const [stackError, setStackError] = useState({
+    message: "",
+  });
   const handleAddTech = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
 
+    if (techStack.includes(projectStackInput)) {
+      setStackError({ message: "Ups! you can't repeat technologies" });
+      return;
+    }
     setTechStack((prevStack) => {
       return [...prevStack, projectStackInput];
+    });
+    setStackError({
+      message: "",
     });
     setProjectStackInput("");
   };
 
   return (
     <section>
-      <form className="flex flex-col gap-4" action={formAction}>
+      <form
+        className="flex flex-col gap-4"
+        action={formAction}
+        onSubmit={() => setTechStack([])}
+      >
         <label className="flex flex-col font-bold gap-2">
           <p className="font-bold text-titles">Project Name</p>
           <AppInput
             placeholder="Project Name"
             name="projectName"
+            className="max-w-[400px]"
             ref={projectNameInput}
             aria-describedby="project-error"
           />
@@ -60,9 +74,21 @@ export const ProjectsForm = () => {
               onChange={(e) => {
                 setProjectStackInput(e.target.value);
               }}
+              className="max-w-[200px]"
+              aria-describedby="tech-error"
             />
             <AppButton text="+" onClick={handleAddTech} />
           </div>
+          {stackError.message.length > 0 && (
+            <p
+              id="tech-error"
+              className="text-red-500"
+              aria-atomic={true}
+              aria-live="polite"
+            >
+              {stackError.message}
+            </p>
+          )}
           <ul className="flex flex-wrap gap-3 p-2 max-w-md">
             {techStack &&
               techStack.map((t) => (
