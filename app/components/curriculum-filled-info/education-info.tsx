@@ -14,8 +14,7 @@ export const EducationInfo = () => {
             key={i}
             className="bg-[#212636] p-2 flex gap-2 rounded-xl text-titles font-mono"
           >
-            <p>{edu.academy}</p>
-            <p>{edu.title}</p>
+            <p className="text-sm">{edu.title}</p>
           </article>
         ))}
     </section>

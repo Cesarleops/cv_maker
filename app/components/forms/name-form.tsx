@@ -1,7 +1,7 @@
 "use client";
 import { useCv } from "@/app/hooks/useCv";
 import { addName } from "@/app/lib/actions";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { AppInput } from "../ui/input";
 import { CvIcons } from "../ui/cv-icons";
@@ -21,10 +21,9 @@ export const NameForm = () => {
     nameInput
   );
 
-  console.log("name", name);
   return name !== "" ? (
-    <div className="flex items-center gap-10">
-      <p className="text-gray-500 font-mono">{name}</p>
+    <div className="flex items-center  justify-between">
+      <p className="text-gray-500 font-mono text-md">{name}</p>
 
       <button
         className="p-2 flex items-center justify-center bg-black w-[50px] rounded-xl hover:border-[1px] border-white"

@@ -14,7 +14,7 @@ export const SkillsInfo = () => {
             key={id}
             className="bg-[#212636] p-2 flex gap-2 rounded-xl text-titles font-mono"
           >
-            <p>{skill}</p>
+            <p className="text-sm">{skill}</p>
           </article>
         ))}
     </section>

@@ -14,7 +14,7 @@ export const ProjectsInfo = () => {
             key={i}
             className="bg-[#212636] p-2 flex gap-2 rounded-xl text-titles font-mono"
           >
-            <p>{pro.name}</p>
+            <p className="text-sm">{pro.name}</p>
           </article>
         ))}
     </section>

@@ -22,8 +22,8 @@ export const LocationForm = () => {
   );
 
   return location ? (
-    <div className="flex items-center gap-10">
-      <p className="text-gray-500 font-mono">{location}</p>
+    <div className="flex items-center  justify-between">
+      <p className="text-gray-500 font-mono text-md">{location}</p>
 
       <button
         className="p-2 flex items-center justify-center bg-black w-[50px] rounded-xl hover:border-[1px] border-white"

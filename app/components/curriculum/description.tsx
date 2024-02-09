@@ -15,7 +15,7 @@ export const DescriptionType = ({
       title={type === "about" ? "About" : preview ? "" : "Introduction"}
       instruction={type === "about" ? "about " : "introduction"}
     >
-      <p className="text-pretty font-mono text-sm text-gray-500 mt-2 max-w-xl break-words">
+      <p className="text-pretty font-mono text-sm text-gray-500 mt-2 max-w-xl ">
         {text}
       </p>
     </CvPreviewCard>

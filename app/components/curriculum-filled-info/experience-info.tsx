@@ -14,8 +14,7 @@ export const ExperienceInfo = () => {
             key={i}
             className="bg-[#212636] p-2 flex gap-2 rounded-xl text-titles font-mono"
           >
-            <p>{exp.company}</p>
-            <p>{exp.role}</p>
+            <p className="text-sm">{exp.role}</p>
           </article>
         ))}
     </section>
