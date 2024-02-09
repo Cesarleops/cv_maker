@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CvIcons } from "./cv-icons";
 import { adjustedTitle } from "@/app/lib/helpers";
+import { GoBack } from "./go-back";
 
 interface Props {
   children: React.ReactNode;
@@ -15,12 +16,12 @@ export const CvInfoForm = ({ children, title, subtitle }: Props) => {
           <h4 className="text-titles font-bold text-xl">
             {adjustedTitle(title)}
           </h4>
-          <p className="text-secondary text-sm">{subtitle}</p>
+          <p className="text-secondary text-sm text-pretty max-w-md">
+            {subtitle}
+          </p>
         </div>
 
-        <button className="p-2 rounded-full bg-terciary">
-          <Link href={"/home"}>{CvIcons.goBack()}</Link>
-        </button>
+        <GoBack />
       </header>
       <div className="flex flex-col gap-5">{children}</div>
     </section>

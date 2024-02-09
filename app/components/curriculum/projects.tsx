@@ -1,30 +1,54 @@
 import { Project } from "@/types";
 import { CvPreviewCard } from "../ui/cv-preview-card";
+import { cn } from "@/app/lib/utils";
+import { useCvActions } from "@/app/hooks/useCvActions";
 
 export const ProjectsType = ({
   projects,
   preview = false,
+  isEditing,
 }: {
   projects: Project[];
   preview?: boolean;
+  isEditing?: boolean;
 }) => {
-  console.log("pr", projects);
+  const { itemToUpdate, cvData } = useCvActions();
   return (
-    <CvPreviewCard preview={preview}>
-      <p className="text-xl font-bold">Projects</p>
-      <div className="flex flex-wrap gap-8 pt-4">
-        {projects.map((p) => (
+    <CvPreviewCard
+      preview={preview}
+      title="Projects"
+      instruction="projects"
+      className="print:mt-40"
+    >
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4">
+        {projects.map((project) => (
           <article
-            className="flex flex-col gap-2 p-5  rounded-lg border-[1px] border-solid  border-[#e5e7eb]"
-            key={p.name}
+            className={cn(
+              "flex flex-col gap-2 p-3 justify-between rounded-lg border-[1px] border-solid  border-[#e5e7eb] ",
+              {
+                "hover:border-[1px] hover:border-green-500": isEditing,
+                "border-green-500 border-[1px]":
+                  cvData.editionMode.editingSection?.id === project.id,
+              }
+            )}
+            key={project.id}
+            onClick={() => itemToUpdate(project)}
           >
-            <p className="text-xl text-sections font-semibold leading-none tracking-tight">
-              {p.name}
-            </p>
-            <p className="font-mono text-gray-500">{p.description}</p>
-            <ul className="flex flex-wrap max-w-[200px] gap-2">
-              {p.tech.map((t) => (
-                <li className="p-2 rounded-xl bg-[#f3f4f6]" key={t}>
+            <div className="flex flex-col gap-2">
+              <p className="text-xl text-sections font-semibold leading-none tracking-tight">
+                {project.name}
+              </p>
+              <p className="font-mono text-xs text-gray-500 text-pretty break-words">
+                {project.description}
+              </p>
+            </div>
+
+            <ul className="flex flex-wrap max-w-sm gap-2 ">
+              {project.tech.map((t) => (
+                <li
+                  className="p-2 rounded-xl bg-[#f3f4f6] font-mono text-xs"
+                  key={t}
+                >
                   {t}
                 </li>
               ))}

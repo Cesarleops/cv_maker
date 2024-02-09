@@ -1,25 +1,38 @@
 "use client";
 import { useCv } from "@/app/hooks/useCv";
-import { AppButton } from "../ui/button";
+import { Button } from "../ui/button";
 import { AppInput } from "../ui/input";
 import { useRef } from "react";
 import { addLocation } from "@/app/lib/actions";
-import { useCvContext } from "@/app/context/store";
+import { useCvActions } from "@/app/hooks/useCvActions";
+import { CvIcons } from "../ui/cv-icons";
 
 export const LocationForm = () => {
   const locationInput = useRef(null);
   const {
     cvData: { location },
-  } = useCvContext();
+    editLocation,
+  } = useCvActions();
+
   const { formAction, formState } = useCv(
-    "description",
+    "DESCRIPTION",
     addLocation,
     "location",
     locationInput
   );
 
   return location ? (
-    <p className="text-gray-500 font-mono">{location}</p>
+    <div className="flex items-center gap-10">
+      <p className="text-gray-500 font-mono">{location}</p>
+
+      <button
+        className="p-2 flex items-center justify-center bg-black w-[50px] rounded-xl hover:border-[1px] border-white"
+        onClick={() => editLocation()}
+        type="button"
+      >
+        {CvIcons.edit()}
+      </button>
+    </div>
   ) : (
     <section>
       <form action={formAction} className="flex gap-2 items-center">
@@ -31,7 +44,7 @@ export const LocationForm = () => {
           aria-describedby="location-error"
         />
 
-        <AppButton text="+" />
+        <Button title="+" />
       </form>
       <div id="location-error" aria-atomic={true} aria-live="polite">
         {formState.errors?.location &&

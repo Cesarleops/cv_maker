@@ -1,10 +1,13 @@
 "use client";
 import { addToExperience } from "@/app/lib/actions";
 import { AppInput } from "../ui/input";
-import { AppButton } from "../ui/button";
+import { Button } from "../ui/button";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useCv } from "@/app/hooks/useCv";
+import { cn } from "@/app/lib/utils";
+import { CvIcons } from "../ui/cv-icons";
+import { useCvActions } from "@/app/hooks/useCvActions";
 
 export const ExperienceForm = () => {
   const inputRoleRef = useRef<HTMLInputElement | null>(null);
@@ -13,9 +16,22 @@ export const ExperienceForm = () => {
   const inputEndDateRef = useRef<HTMLInputElement | null>(null);
   const inputStartDateRef = useRef<HTMLInputElement | null>(null);
 
+  const {
+    setEditing,
+    obtainFieldsFromEditingItem,
+
+    cvData: { editionMode, experience },
+  } = useCvActions();
+
+  const addToExperienceWithAllExp = addToExperience.bind(
+    null,
+    experience,
+    editionMode.editingSection?.id,
+    editionMode.isEditing
+  );
   const { formAction, formState } = useCv(
-    "listedInfo",
-    addToExperience,
+    "LISTED_INFO",
+    addToExperienceWithAllExp,
     "experience",
     inputCompanyRef,
     inputDescriptionRef,
@@ -23,6 +39,19 @@ export const ExperienceForm = () => {
     inputStartDateRef,
     inputRoleRef
   );
+
+  useEffect(() => {
+    if (editionMode.editingSection) {
+      obtainFieldsFromEditingItem(
+        inputCompanyRef,
+        inputDescriptionRef,
+        inputRoleRef,
+        inputEndDateRef,
+        inputStartDateRef
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editionMode.editingSection]);
 
   return (
     <section>
@@ -73,7 +102,11 @@ export const ExperienceForm = () => {
               </div>
             </div>
           </div>
-          <fieldset className="flex items-center gap-4 h-24 text-titles w-fit ">
+          <fieldset
+            className={cn("flex items-center gap-4 h-24 text-titles w-fit ", {
+              "mb-5": formState.errors?.endDate || formState.errors?.startDate,
+            })}
+          >
             <div className="self-start ">
               <label className="flex flex-col gap-2">
                 <p className="font-bold">Start Date</p>
@@ -89,7 +122,7 @@ export const ExperienceForm = () => {
               <div id="startDate-error" aria-atomic={true} aria-live="polite">
                 {formState.errors?.startDate &&
                   formState.errors.startDate.map((error: string) => (
-                    <p className="mt-2 text-sm text-red-500" key={error}>
+                    <p className="mt-2 text-sm text-red-500 mb-5" key={error}>
                       {error}
                     </p>
                   ))}
@@ -127,7 +160,16 @@ export const ExperienceForm = () => {
             className="bg-white h-[80px] w-full border-[#ecedee] rounded-xl  border-solid border-2 p-3"
           ></textarea>
         </div>
-        <AppButton text="add" />
+        <footer className="flex gap-3">
+          <Button title="add" />
+          <button
+            className="p-2 flex items-center justify-center bg-sections w-[100px] rounded-xl hover:border-[1px] border-white"
+            onClick={() => setEditing("experience")}
+            type="button"
+          >
+            {CvIcons.edit()}
+          </button>
+        </footer>
       </form>
     </section>
   );

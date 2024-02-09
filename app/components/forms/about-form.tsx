@@ -1,14 +1,24 @@
 "use client";
 import { useRef } from "react";
-import { AppButton } from "../ui/button";
+import { Button } from "../ui/button";
 import { useCv } from "@/app/hooks/useCv";
 import { addToAbout } from "@/app/lib/actions";
+import { CvIcons } from "../ui/cv-icons";
+import { useCvContext } from "@/app/context/store";
 
 export const AboutForm = () => {
-  const inputAboutRef = useRef(null);
+  const inputAboutRef = useRef<HTMLTextAreaElement | null>(null);
+  const {
+    cvData: { about },
+  } = useCvContext();
 
+  const starEditing = (value: string) => {
+    if (inputAboutRef.current) {
+      inputAboutRef.current.value = value;
+    }
+  };
   const { formAction, formState } = useCv(
-    "description",
+    "DESCRIPTION",
     addToAbout,
     "about",
     inputAboutRef
@@ -32,7 +42,15 @@ export const AboutForm = () => {
               </p>
             ))}
         </div>
-        <AppButton text="add" />
+        <footer className="flex gap-3">
+          <Button title="add" />
+          <button
+            className="p-2 flex items-center justify-center bg-sections w-[100px] rounded-xl hover:border-[1px] border-white"
+            onClick={() => starEditing(about)}
+          >
+            {CvIcons.edit()}
+          </button>
+        </footer>
       </form>
     </section>
   );

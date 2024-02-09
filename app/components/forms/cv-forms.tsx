@@ -16,6 +16,6 @@ export const CvForms = ({ section }: Props) => {
   if (section === "education") return <EducationForm />;
   if (section === "experience") return <ExperienceForm />;
   if (section === "skills") return <SkillsForm />;
-  if (section === "links" || section === "skills") return <LinksForm />;
+  if (section === "links") return <LinksForm />;
   return <AboutForm />;
 };

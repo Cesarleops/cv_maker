@@ -3,19 +3,28 @@ export interface State {
   location: string;
   introduction: string;
   about: string;
-  skills: string[];
+  skills: Skill[];
   links: {
-    email: string;
     github: string;
     portfolio: string;
     linkedin: string;
-  }[];
+  };
   experience: Exp[];
   projects: Project[];
   education: Academy[];
+  editionMode: {
+    editingSection: Partial<State> | null;
+    isEditing: boolean;
+  };
   [index: string]: any;
 }
+
+export interface Skill {
+  id: string;
+  skill: string;
+}
 export interface Exp {
+  id: string;
   company: string;
   role: string;
   startDate: string;
@@ -24,12 +33,14 @@ export interface Exp {
 }
 
 export interface Project {
+  id: string;
   name: string;
   tech: string[];
   description: string;
 }
 
 export interface Academy {
+  id: string;
   academy: string;
   title: string;
   startDate: string;
@@ -55,3 +66,59 @@ export interface FormErrors {
   description?: string[];
   role?: string[];
 }
+
+export type Action =
+  | {
+      type: "NEW_LINKS";
+      payload: {
+        data: {
+          email: string;
+          github: string;
+          linkedin: string;
+          portfolio: string;
+        };
+      };
+    }
+  | {
+      type: "DESCRIPTION";
+      payload: {
+        data: string;
+        section: string;
+      };
+    }
+  | {
+      type: "UPDATE";
+      payload: {
+        data: {
+          id: string;
+        };
+        section: string;
+      };
+    }
+  | {
+      type: "LISTED_INFO";
+      payload: {
+        data: string;
+        section: string;
+      };
+    }
+  | {
+      type: "SET_EDITING";
+      payload: {
+        edit: boolean;
+      };
+    }
+  | {
+      type: "ITEM_TO_UPDATE";
+      payload: {
+        data: Project | Exp | Academy | Skill;
+      };
+    }
+  | {
+      type: "EDIT_NAME";
+      payload: null;
+    }
+  | {
+      type: "EDIT_LOCATION";
+      payload: null;
+    };

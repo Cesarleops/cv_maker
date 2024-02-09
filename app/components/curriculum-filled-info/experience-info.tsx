@@ -7,7 +7,7 @@ export const ExperienceInfo = () => {
   } = useCvContext();
 
   return (
-    <section className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2 max-h-72 overflow-y-scroll">
       {experience &&
         experience.map((exp, i) => (
           <article

@@ -7,7 +7,7 @@ export const ProjectsInfo = () => {
   } = useCvContext();
 
   return (
-    <section className="flex flex-col gap-2 overflow-y-scroll">
+    <section className="flex flex-col gap-2 overflow-y-scroll max-h-14">
       {projects &&
         projects.map((pro, i) => (
           <article

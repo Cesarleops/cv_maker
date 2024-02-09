@@ -1,23 +1,32 @@
 "use client";
 
 import { State } from "@/types";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { cvReducer } from "./reducer";
 
 interface ContextProps {
   cvData: State;
   dispatch: React.Dispatch<any>;
 }
-const initialState = {
+const initialState: State = {
   name: "",
   location: "",
   introduction: "",
   about: "",
   skills: [],
-  links: [],
+  links: {
+    email: "",
+    github: "",
+    linkedin: "",
+    portfolio: "",
+  },
   experience: [],
   education: [],
   projects: [],
+  editionMode: {
+    isEditing: false,
+    editingSection: null,
+  },
 };
 
 const CvContext = createContext({} as ContextProps);

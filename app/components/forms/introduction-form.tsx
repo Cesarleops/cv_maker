@@ -2,18 +2,27 @@
 import { useCv } from "@/app/hooks/useCv";
 import { addToIntro } from "@/app/lib/actions";
 import { useRef } from "react";
-import { AppButton } from "../ui/button";
+import { Button } from "../ui/button";
+import { CvIcons } from "../ui/cv-icons";
+import { useCvContext } from "@/app/context/store";
 
 export const IntroductionForm = () => {
-  const inputIntroductionRef = useRef(null);
+  const inputIntroductionRef = useRef<HTMLTextAreaElement | null>(null);
 
   const { formAction, formState } = useCv(
-    "description",
+    "DESCRIPTION",
     addToIntro,
     "introduction",
     inputIntroductionRef
   );
-  console.log(formAction);
+  const {
+    cvData: { introduction },
+  } = useCvContext();
+  const starEditing = (value: string) => {
+    if (inputIntroductionRef.current) {
+      inputIntroductionRef.current.value = value;
+    }
+  };
   return (
     <section>
       <form className="flex flex-col gap-4" action={formAction}>
@@ -32,7 +41,15 @@ export const IntroductionForm = () => {
               </p>
             ))}
         </div>
-        <AppButton text="add" type="submit" />
+        <footer className="flex gap-3">
+          <Button title="add" />
+          <button
+            className="p-2 flex items-center justify-center bg-sections w-[100px] rounded-xl hover:border-[1px] border-white"
+            onClick={() => starEditing(introduction)}
+          >
+            {CvIcons.edit()}
+          </button>
+        </footer>
       </form>
     </section>
   );

@@ -1,17 +1,31 @@
 "use client";
-import { FormEvent, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AppInput } from "../ui/input";
 import { useCv } from "@/app/hooks/useCv";
 import { addToProjects } from "@/app/lib/actions";
-import { AppButton } from "../ui/button";
+import { Button } from "../ui/button";
+import { CvIcons } from "../ui/cv-icons";
+import { useCvActions } from "@/app/hooks/useCvActions";
 
 export const ProjectsForm = () => {
   const [techStack, setTechStack] = useState<string[]>([]);
-  const projectNameInput = useRef(null);
-  const projectDescriptionInput = useRef(null);
-  const addToProjectsWithStack = addToProjects.bind(null, techStack);
+  const projectNameInput = useRef<HTMLInputElement | null>(null);
+  const projectDescriptionInput = useRef<HTMLTextAreaElement | null>(null);
+
+  const {
+    obtainFieldsFromEditingItem,
+    setEditing,
+    cvData: { editionMode, projects },
+  } = useCvActions();
+  const addToProjectsWithStack = addToProjects.bind(
+    null,
+    techStack,
+    projects,
+    editionMode.editingSection?.id,
+    editionMode.isEditing
+  );
   const { formAction, formState } = useCv(
-    "listedInfo",
+    "LISTED_INFO",
     addToProjectsWithStack,
     "projects",
     projectDescriptionInput,
@@ -26,6 +40,10 @@ export const ProjectsForm = () => {
   ) => {
     e.preventDefault();
 
+    if (projectStackInput === "") {
+      setStackError({ message: "Ups! you can't add an empty field" });
+      return;
+    }
     if (techStack.includes(projectStackInput)) {
       setStackError({ message: "Ups! you can't repeat technologies" });
       return;
@@ -39,6 +57,13 @@ export const ProjectsForm = () => {
     setProjectStackInput("");
   };
 
+  useEffect(() => {
+    if (editionMode.editingSection) {
+      obtainFieldsFromEditingItem(projectDescriptionInput, projectNameInput);
+      setTechStack(editionMode.editingSection.tech);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editionMode.editingSection]);
   return (
     <section>
       <form
@@ -50,7 +75,7 @@ export const ProjectsForm = () => {
           <p className="font-bold text-titles">Project Name</p>
           <AppInput
             placeholder="Project Name"
-            name="projectName"
+            name="name"
             className="max-w-[400px]"
             ref={projectNameInput}
             aria-describedby="project-error"
@@ -77,7 +102,7 @@ export const ProjectsForm = () => {
               className="max-w-[200px]"
               aria-describedby="tech-error"
             />
-            <AppButton text="+" onClick={handleAddTech} />
+            <Button title="+" onClick={handleAddTech} />
           </div>
           {stackError.message.length > 0 && (
             <p
@@ -92,7 +117,7 @@ export const ProjectsForm = () => {
           <ul className="flex flex-wrap gap-3 p-2 max-w-md">
             {techStack &&
               techStack.map((t) => (
-                <li className="rounded-xl bg-lime-400 p-2" key={t}>
+                <li className="rounded-xl bg-pink-500 p-2 text-white" key={t}>
                   {t}
                 </li>
               ))}
@@ -104,7 +129,7 @@ export const ProjectsForm = () => {
           </p>
           <textarea
             ref={projectDescriptionInput}
-            name="projectDescription"
+            name="description"
             className="bg-white h-[60px] w-4/5 border-[#ecedee] rounded-xl  border-solid border-2 p-3"
           ></textarea>
           <div id="user-error" aria-atomic={true} aria-live="polite">
@@ -116,7 +141,16 @@ export const ProjectsForm = () => {
               ))}
           </div>
         </label>
-        <AppButton text="Add" />
+        <footer className="flex gap-3">
+          <Button title="add" />
+          <button
+            className="p-2 flex items-center justify-center bg-sections w-[100px] rounded-xl hover:border-[1px] border-white"
+            onClick={() => setEditing("projects")}
+            type="button"
+          >
+            {CvIcons.edit()}
+          </button>
+        </footer>
       </form>
     </section>
   );

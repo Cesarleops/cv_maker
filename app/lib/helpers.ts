@@ -13,7 +13,7 @@ export const subtitle = (section: string) => {
   }
 
   if (section === "links") {
-    return "Contact Info";
+    return "Contact Info, if you are not familiar with some of these, leave it blank.";
   }
 
   if (section === "skills") {
@@ -22,6 +22,10 @@ export const subtitle = (section: string) => {
 
   if (section === "about") {
     return "Describe yourself";
+  }
+
+  if (section === "education") {
+    return "How did you get your knowledge";
   }
 
   return "";

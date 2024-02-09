@@ -3,10 +3,11 @@
 import { AppInput } from "../ui/input";
 import { addToLinks } from "@/app/lib/actions";
 import { useRef } from "react";
-import { AppButton } from "../ui/button";
+import { Button } from "../ui/button";
 import { useCv } from "@/app/hooks/useCv";
 import { Icons } from "../ui/icons";
 import { CvIcons } from "../ui/cv-icons";
+import { useCvActions } from "@/app/hooks/useCvActions";
 export const LinksForm = () => {
   const inputGithubRef = useRef<HTMLInputElement | null>(null);
   const inputLinkedinRef = useRef<HTMLInputElement | null>(null);
@@ -14,7 +15,7 @@ export const LinksForm = () => {
   const inputEmailRef = useRef<HTMLInputElement | null>(null);
 
   const { formAction, formState } = useCv(
-    "listedInfo",
+    "NEW_LINKS",
     addToLinks,
     "links",
     inputGithubRef,
@@ -22,7 +23,8 @@ export const LinksForm = () => {
     inputLinkedinRef,
     inputPortfolioRef
   );
-  console.log("my links", formState);
+
+  const { setEditing } = useCvActions();
   return (
     <section className="flex flex-col gap-4">
       <form className="flex flex-col gap-8 items-center" action={formAction}>
@@ -118,7 +120,7 @@ export const LinksForm = () => {
           </div>
         </article>
 
-        <AppButton text="Add" type="submit" />
+        <Button title="Add" type="submit" />
       </form>
     </section>
   );

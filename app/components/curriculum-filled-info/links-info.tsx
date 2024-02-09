@@ -1,6 +1,7 @@
 "use client";
 
 import { useCvContext } from "@/app/context/store";
+
 import { CvIcons } from "../ui/cv-icons";
 import { Icons } from "../ui/icons";
 
@@ -9,29 +10,28 @@ export const LinksInfo = () => {
     cvData: { links },
   } = useCvContext();
   return (
-    links.length > 0 && (
-      <ul className="flex gap-6 items-center justify-center ">
-        <li className="bg-[#212636] p-2 rounded-xl shadow-md">
-          <a href={links[0].email}>
-            {Icons.email({ className: "stroke-white" })}
-          </a>
+    <ul className="flex gap-6 items-center justify-start mt-4">
+      {links.email && (
+        <li className=" rounded-lg border-[1px] border-solid  border-borders p-2 ">
+          {Icons.email({ className: "stroke-gray-500" })}
         </li>
-        <li className="bg-[#212636] p-2 rounded-xl shadow-md">
-          <a href={links[0].github} target="_blank">
-            {CvIcons.github({ className: "stroke-white" })}
-          </a>
+      )}
+      {links.linkedin && (
+        <li className=" rounded-lg border-[1px] border-solid  border-borders p-2 ">
+          {CvIcons.linkedin({ className: "stroke-gray-500" })}
         </li>
-        <li className="bg-[#212636] p-2 rounded-xl shadow-md">
-          <a href={links[0].portfolio}>
-            {CvIcons.portfolio({ className: "stroke-white" })}
-          </a>
+      )}
+
+      {links.github && (
+        <li className=" rounded-lg border-[1px] border-solid  border-borders p-2 ">
+          {CvIcons.github({ className: "stroke-gray-500" })}
         </li>
-        <li className="bg-[#212636] p-2 rounded-xl shadow-md">
-          <a href={links[0].linkedin}>
-            {CvIcons.linkedin({ className: "stroke-white" })}
-          </a>
+      )}
+      {links.portfolio && (
+        <li className=" rounded-lg border-[1px] border-solid  border-borders p-2 ">
+          {CvIcons.portfolio({ className: "stroke-gray-500" })}
         </li>
-      </ul>
-    )
+      )}
+    </ul>
   );
 };
