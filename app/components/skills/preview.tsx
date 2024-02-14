@@ -2,8 +2,9 @@ import { cn } from "@/app/lib/utils";
 import { CvPreviewCard } from "../ui/cv-preview-card";
 import { useCvActions } from "@/app/hooks/useCvActions";
 import { State } from "@/types";
+import { EmptyInfo } from "../curriculum/empty-info";
 
-export const SkillsType = ({
+export const SkillsPreview = ({
   skills,
   preview = false,
   isEditing,
@@ -12,8 +13,10 @@ export const SkillsType = ({
   preview?: boolean;
   isEditing?: boolean;
 }) => {
-  const { itemToUpdate, cvData } = useCvActions();
-  console.log("s", skills);
+  const { cvData, modfifyField } = useCvActions();
+  if (skills.length === 0 && preview) {
+    return <EmptyInfo title="Skills" />;
+  }
   return (
     <CvPreviewCard
       preview={preview}
@@ -22,21 +25,22 @@ export const SkillsType = ({
       instruction="skills"
     >
       <ul className="flex gap-4 items-center pt-2 flex-wrap max-w-lg">
-        {skills.map(({ skill, id }) => (
+        {skills.map((s) => (
           <li
-            onClick={() => itemToUpdate({ skill, id })}
+            onClick={() => modfifyField("skills", s)}
             className={cn(
               "rounded-lg border-[1px] border-solid  border-[#e5e7eb] p-2",
               {
                 "animate-appear": preview,
                 "hover:border-green-500": isEditing,
                 "border-green-500 border-[1px]":
-                  cvData.editionMode.editingSection?.id === id,
+                  cvData.editionMode.editingSection?.id === s.id,
+                "hover:border-red-500": cvData.editionMode.isDeleting,
               }
             )}
-            key={id}
+            key={s.id}
           >
-            {skill}
+            {s.skill}
           </li>
         ))}
       </ul>

@@ -1,19 +1,19 @@
 import { CvSection } from "./cv-section";
 import { CvIcons } from "./cv-icons";
-import { NameForm } from "../forms/name-form";
-import { LocationForm } from "../forms/location-form";
+import { NameForm } from "../name/form";
+import { LocationForm } from "../location/form";
 import { Menu } from "./menu";
-import { ExperienceInfo } from "../curriculum-filled-info/experience-info";
-import { ProjectsInfo } from "../curriculum-filled-info/projects-info";
-import { EducationInfo } from "../curriculum-filled-info/education-info";
-import { IntroductionInfo } from "../curriculum-filled-info/introduction-info";
-import { AboutInfo } from "../curriculum-filled-info/about-info";
-import { SkillsInfo } from "../curriculum-filled-info/skills-info";
-import { LinksInfo } from "../curriculum-filled-info/links-info";
+import { ExperienceInfo } from "../experience/completed";
+import { ProjectsInfo } from "../projects/completed";
+import { EducationInfo } from "../education/completed";
+import { IntroductionInfo } from "../introduction/completed";
+import { AboutInfo } from "../about/completed";
+import { SkillsInfo } from "../skills/completed";
+import { LinksInfo } from "../links/completed";
 
 export const CvCreator = () => {
   return (
-    <main className="flex flex-col items-center justify-center gap-8 py-5">
+    <main className="flex flex-col items-center justify-center gap-8 py-5 bg-radial point-size w-screen min-h-screen">
       <Menu />
       <div className="flex flex-col  sm:grid sm:grid-cols-3 sm:grid-rows-3 gap-8">
         <CvSection
@@ -27,7 +27,10 @@ export const CvCreator = () => {
           title="Links"
           subtitle="Add contact info like email or portfolio"
           className={`row-span-1`}
-          icon={CvIcons.links()}
+          icon={CvIcons.links({
+            className:
+              "stroke-white group-hover:stroke-sections duration-105 transition-colors",
+          })}
         >
           <LinksInfo />
         </CvSection>
@@ -35,7 +38,10 @@ export const CvCreator = () => {
           title="Experience"
           subtitle="Places you`ve worked, roles, longevity, an small description of the role"
           className={`row-span-3 `}
-          icon={CvIcons.experience()}
+          icon={CvIcons.experience({
+            className:
+              "stroke-white group-hover:stroke-sections duration-105 transition-colors",
+          })}
         >
           <ExperienceInfo />
         </CvSection>
@@ -43,7 +49,10 @@ export const CvCreator = () => {
           title="Introduction"
           subtitle="A brief intro of yourself"
           className={`row-span-1`}
-          icon={CvIcons.introduction()}
+          icon={CvIcons.introduction({
+            className:
+              "stroke-white group-hover:stroke-sections duration-105 transition-colors",
+          })}
         >
           <IntroductionInfo />
         </CvSection>
@@ -51,14 +60,20 @@ export const CvCreator = () => {
           title="Skills"
           subtitle="List your skills!"
           className={`row-span-2`}
-          icon={CvIcons.skills()}
+          icon={CvIcons.skills({
+            className:
+              "stroke-white group-hover:stroke-sections duration-105 transition-colors",
+          })}
         >
           <SkillsInfo />
         </CvSection>
         <CvSection
           title="About"
           subtitle="Who are you"
-          icon={CvIcons.about()}
+          icon={CvIcons.about({
+            className:
+              "stroke-white group-hover:stroke-sections duration-105 transition-colors",
+          })}
           className={`row-span-1`}
         >
           <AboutInfo />
@@ -73,7 +88,10 @@ export const CvCreator = () => {
         <CvSection
           title="Projects"
           subtitle="Things you've worked on"
-          icon={CvIcons.projects()}
+          icon={CvIcons.projects({
+            className:
+              "stroke-white group-hover:stroke-sections duration-105 transition-colors",
+          })}
           className={`row-span-3`}
         >
           <ProjectsInfo />
@@ -81,7 +99,10 @@ export const CvCreator = () => {
         <CvSection
           title="Education"
           subtitle="Knowledge"
-          icon={CvIcons.education()}
+          icon={CvIcons.education({
+            className:
+              "stroke-white group-hover:stroke-sections duration-105 transition-colors",
+          })}
           className={`row-span-3`}
         >
           <EducationInfo />

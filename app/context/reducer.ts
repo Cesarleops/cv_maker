@@ -18,6 +18,23 @@ export const cvReducer = (state: State, { payload, type }: Action) => {
     };
   }
   if (type === "DESCRIPTION") {
+    console.log("p", payload.data);
+    if (payload.data.name) {
+      const newState = {
+        ...state,
+        [payload.section]: payload.data.name,
+      };
+      updateLocalStorage(newState);
+      return newState;
+    }
+    if (payload.data.location) {
+      const newState = {
+        ...state,
+        [payload.section]: payload.data.location,
+      };
+      updateLocalStorage(newState);
+      return newState;
+    }
     const newState = {
       ...state,
       [payload.section]: payload.data,
@@ -50,24 +67,70 @@ export const cvReducer = (state: State, { payload, type }: Action) => {
   }
 
   if (type === "SET_EDITING") {
-    return {
+    const newState = {
       ...state,
       editionMode: {
         ...state.editionMode,
         isEditing: payload.edit,
+        isDeleting: false,
       },
     };
+    updateLocalStorage(newState);
+
+    return newState;
   }
 
   if (type === "ITEM_TO_UPDATE") {
-    console.log("uu", payload);
-    return {
+    const newState = {
       ...state,
       editionMode: {
         ...state.editionMode,
         editingSection: payload.data,
       },
     };
+    return newState;
+  }
+
+  if (type === "SET_DELETING") {
+    const newState = {
+      ...state,
+      editionMode: {
+        ...state.editionMode,
+        isDeleting: payload,
+        isEditing: false,
+      },
+    };
+    updateLocalStorage(newState);
+
+    return newState;
+  }
+  if (type === "DELETE") {
+    const updatedArray = state[payload.section].filter(
+      (item: any) => item.id !== payload.data
+    );
+
+    if (state[payload.section].length === 1) {
+      const newState = {
+        ...state,
+        [payload.section]: updatedArray,
+        editionMode: {
+          ...state.editionMode,
+          isDeleting: false,
+        },
+      };
+
+      updateLocalStorage(newState);
+      return newState;
+    }
+    const newState = {
+      ...state,
+      [payload.section]: updatedArray,
+      editionMode: {
+        ...state.editionMode,
+      },
+    };
+    updateLocalStorage(newState);
+    return newState;
   }
 
   if (type === "UPDATE") {
@@ -81,9 +144,22 @@ export const cvReducer = (state: State, { payload, type }: Action) => {
     const newState = {
       ...state,
       [payload.section]: updatedArray,
+      editionMode: {
+        ...state.editionMode,
+        editingSection: null,
+      },
     };
+
     updateLocalStorage(newState);
     return newState;
+  }
+
+  /**
+   * This action is used to syncronize the state with local storage if it exists
+   * can't use a simple variable because of next server rendering
+   */
+  if (type === "SAVE") {
+    return payload.data;
   }
 
   return state;

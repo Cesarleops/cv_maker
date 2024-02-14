@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  background-color: #151419;
+@layer components {
+  .bg-radial {
+    background-image: radial-gradient(circle, #151419 0.5px, white 0.5px);
+    opacity: 0.8px;
+  }
+
+  .point-size {
+    background-size: 15px 15px;
+  }
+
+  .bg-radial-alt {
+    background-image: radial-gradient(circle, gray 0.5px, white 0.5px);
+    opacity: 0.8px;
+  }
 }

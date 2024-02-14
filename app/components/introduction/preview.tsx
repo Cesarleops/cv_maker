@@ -1,6 +1,6 @@
 import { CvPreviewCard } from "../ui/cv-preview-card";
 
-export const DescriptionType = ({
+export const IntroductionPreview = ({
   type,
   text,
   preview = false,
@@ -12,10 +12,10 @@ export const DescriptionType = ({
   return (
     <CvPreviewCard
       preview={preview}
-      title={type === "about" ? "About" : preview ? "" : "Introduction"}
-      instruction={type === "about" ? "about " : "introduction"}
+      title={preview ? "" : "Introduction"}
+      instruction={"Introduction"}
     >
-      <p className="text-pretty font-mono text-sm text-gray-500 mt-2 max-w-xl ">
+      <p className="text-pretty font-mono text-sm text-gray-500 mt-2 max-w-md break-words ">
         {text}
       </p>
     </CvPreviewCard>

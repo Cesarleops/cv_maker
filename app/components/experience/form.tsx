@@ -1,13 +1,11 @@
 "use client";
 import { addToExperience } from "@/app/lib/actions";
 import { AppInput } from "../ui/input";
-import { Button } from "../ui/button";
-
 import { useEffect, useRef } from "react";
 import { useCv } from "@/app/hooks/useCv";
 import { cn } from "@/app/lib/utils";
-import { CvIcons } from "../ui/cv-icons";
 import { useCvActions } from "@/app/hooks/useCvActions";
+import { CvControls } from "../ui/cv-controls";
 
 export const ExperienceForm = () => {
   const inputRoleRef = useRef<HTMLInputElement | null>(null);
@@ -16,10 +14,9 @@ export const ExperienceForm = () => {
   const inputEndDateRef = useRef<HTMLInputElement | null>(null);
   const inputStartDateRef = useRef<HTMLInputElement | null>(null);
 
+  const formRef = useRef<HTMLFormElement | null>(null);
   const {
-    setEditing,
     obtainFieldsFromEditingItem,
-
     cvData: { editionMode, experience },
   } = useCvActions();
 
@@ -29,15 +26,11 @@ export const ExperienceForm = () => {
     editionMode.editingSection?.id,
     editionMode.isEditing
   );
+
   const { formAction, formState } = useCv(
     "LISTED_INFO",
     addToExperienceWithAllExp,
-    "experience",
-    inputCompanyRef,
-    inputDescriptionRef,
-    inputEndDateRef,
-    inputStartDateRef,
-    inputRoleRef
+    "experience"
   );
 
   useEffect(() => {
@@ -53,9 +46,12 @@ export const ExperienceForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editionMode.editingSection]);
 
+  if (!formState.errors) {
+    formRef.current?.reset();
+  }
   return (
     <section>
-      <form className="flex flex-col gap-3" action={formAction}>
+      <form ref={formRef} className="flex flex-col gap-3" action={formAction}>
         <fieldset className="flex flex-col gap-10 ">
           <div className="flex flex-col gap-5 ">
             <div>
@@ -160,16 +156,7 @@ export const ExperienceForm = () => {
             className="bg-white h-[80px] w-full border-[#ecedee] rounded-xl  border-solid border-2 p-3"
           ></textarea>
         </div>
-        <footer className="flex gap-3">
-          <Button title="add" />
-          <button
-            className="p-2 flex items-center justify-center bg-sections w-[100px] rounded-xl hover:border-[1px] border-white"
-            onClick={() => setEditing("experience")}
-            type="button"
-          >
-            {CvIcons.edit()}
-          </button>
-        </footer>
+        <CvControls section="experience" />
       </form>
     </section>
   );

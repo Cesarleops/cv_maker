@@ -2,8 +2,9 @@ import { Project } from "@/types";
 import { CvPreviewCard } from "../ui/cv-preview-card";
 import { cn } from "@/app/lib/utils";
 import { useCvActions } from "@/app/hooks/useCvActions";
+import { EmptyInfo } from "../curriculum/empty-info";
 
-export const ProjectsType = ({
+export const ProjectsPreview = ({
   projects,
   preview = false,
   isEditing,
@@ -12,15 +13,19 @@ export const ProjectsType = ({
   preview?: boolean;
   isEditing?: boolean;
 }) => {
-  const { itemToUpdate, cvData } = useCvActions();
+  const { cvData, modfifyField } = useCvActions();
+  console.log(cvData);
+  if (projects.length === 0 && preview) {
+    return <EmptyInfo title="Projects" />;
+  }
   return (
     <CvPreviewCard
       preview={preview}
       title="Projects"
       instruction="projects"
-      className="print:mt-40"
+      className=" print:mt-40"
     >
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 ">
         {projects.map((project) => (
           <article
             className={cn(
@@ -29,10 +34,12 @@ export const ProjectsType = ({
                 "hover:border-[1px] hover:border-green-500": isEditing,
                 "border-green-500 border-[1px]":
                   cvData.editionMode.editingSection?.id === project.id,
+                "hover:border-red-500 border-[1px]":
+                  cvData.editionMode.isDeleting,
               }
             )}
             key={project.id}
-            onClick={() => itemToUpdate(project)}
+            onClick={() => modfifyField("projects", project)}
           >
             <div className="flex flex-col gap-2">
               <p className="text-xl text-sections font-semibold leading-none tracking-tight">

@@ -12,7 +12,7 @@ export const ProjectsInfo = () => {
         projects.map((pro, i) => (
           <article
             key={i}
-            className="bg-[#212636] p-2 flex gap-2 rounded-xl text-titles font-mono"
+            className="bg-titles p-2 flex gap-2 rounded-xl text-sections font-mono"
           >
             <p className="text-sm">{pro.name}</p>
           </article>

@@ -1,11 +1,10 @@
 "use client";
 import { useCv } from "@/app/hooks/useCv";
-import { Button } from "../ui/button";
 import { AppInput } from "../ui/input";
 import { addToEducation } from "@/app/lib/actions";
 import { useEffect, useRef } from "react";
 import { useCvActions } from "@/app/hooks/useCvActions";
-import { CvIcons } from "../ui/cv-icons";
+import { CvControls } from "../ui/cv-controls";
 
 export const EducationForm = () => {
   const academyInputRef = useRef<HTMLInputElement | null>(null);
@@ -14,9 +13,8 @@ export const EducationForm = () => {
   const titleInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
-    obtainFieldsFromEditingItem,
-    setEditing,
     cvData: { editionMode, education },
+    obtainFieldsFromEditingItem,
   } = useCvActions();
 
   const addToEducationExpanded = addToEducation.bind(
@@ -25,31 +23,33 @@ export const EducationForm = () => {
     editionMode.editingSection?.id,
     editionMode.isEditing
   );
+
+  const formRef = useRef<HTMLFormElement | null>(null);
+
   const { formAction, formState } = useCv(
     "LISTED_INFO",
     addToEducationExpanded,
-    "education",
-    startDateInputRef,
-    endDateInputRef,
-    academyInputRef,
-    titleInputRef
+    "education"
   );
 
   useEffect(() => {
     if (editionMode.editingSection) {
       obtainFieldsFromEditingItem(
+        academyInputRef,
         startDateInputRef,
         endDateInputRef,
-        titleInputRef,
-        academyInputRef
+        titleInputRef
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editionMode.editingSection]);
+
+  if (!formState.errors) {
+    formRef.current?.reset();
+  }
 
   return (
     <section>
-      <form className="flex flex-col gap-4" action={formAction}>
+      <form className="flex flex-col gap-4" ref={formRef} action={formAction}>
         <fieldset className="flex flex-col  gap-4 ">
           <label className="flex flex-col gap-2">
             <p className="text-titles font-bold">Academy</p>
@@ -122,16 +122,7 @@ export const EducationForm = () => {
           </div>
         </fieldset>
 
-        <footer className="flex gap-3">
-          <Button title="add" />
-          <button
-            className="p-2 flex items-center justify-center bg-sections w-[100px] rounded-xl hover:border-[1px] border-white"
-            onClick={() => setEditing("education")}
-            type="button"
-          >
-            {CvIcons.edit()}
-          </button>
-        </footer>
+        <CvControls section="education" />
       </form>
     </section>
   );

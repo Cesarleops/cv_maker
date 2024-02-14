@@ -1,5 +1,4 @@
 "use client";
-
 import { AppInput } from "../ui/input";
 import { addToLinks } from "@/app/lib/actions";
 import { useRef } from "react";
@@ -7,27 +6,23 @@ import { Button } from "../ui/button";
 import { useCv } from "@/app/hooks/useCv";
 import { Icons } from "../ui/icons";
 import { CvIcons } from "../ui/cv-icons";
-import { useCvActions } from "@/app/hooks/useCvActions";
 export const LinksForm = () => {
   const inputGithubRef = useRef<HTMLInputElement | null>(null);
   const inputLinkedinRef = useRef<HTMLInputElement | null>(null);
   const inputPortfolioRef = useRef<HTMLInputElement | null>(null);
   const inputEmailRef = useRef<HTMLInputElement | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
-  const { formAction, formState } = useCv(
-    "NEW_LINKS",
-    addToLinks,
-    "links",
-    inputGithubRef,
-    inputEmailRef,
-    inputLinkedinRef,
-    inputPortfolioRef
-  );
+  const { formAction, formState } = useCv("NEW_LINKS", addToLinks, "links");
 
-  const { setEditing } = useCvActions();
+  console.log("2", formRef.current);
+  if (formRef.current && !formState.errors) {
+    formRef.current.reset();
+  }
+
   return (
     <section className="flex flex-col gap-4">
-      <form className="flex flex-col gap-8 items-center" action={formAction}>
+      <form ref={formRef} className="flex flex-col gap-8 " action={formAction}>
         <article className="flex flex-col">
           <div className="flex gap-2 items-center">
             {CvIcons.github({ className: "stroke-white" })}
@@ -120,7 +115,23 @@ export const LinksForm = () => {
           </div>
         </article>
 
-        <Button title="Add" type="submit" />
+        <Button title="add" className="w-20">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="stroke-sections"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+        </Button>
       </form>
     </section>
   );

@@ -8,13 +8,15 @@ export interface State {
     github: string;
     portfolio: string;
     linkedin: string;
+    email: string;
   };
   experience: Exp[];
   projects: Project[];
   education: Academy[];
   editionMode: {
-    editingSection: Partial<State> | null;
+    editingSection: any;
     isEditing: boolean;
+    isDeleting: boolean;
   };
   [index: string]: any;
 }
@@ -121,4 +123,24 @@ export type Action =
   | {
       type: "EDIT_LOCATION";
       payload: null;
+    }
+  | {
+      type: "SAVE";
+      payload: {
+        data: State;
+      };
+    }
+  | {
+      type: "SET_DELETING";
+      payload: boolean;
+    }
+  | {
+      type: "DELETE";
+      payload: {
+        section: string;
+
+        data: {
+          id: string;
+        };
+      };
     };

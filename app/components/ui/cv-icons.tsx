@@ -33,7 +33,7 @@ export const CvIcons = {
       ></path>
     </svg>
   ),
-  links: () => (
+  links: (props: iconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -45,6 +45,7 @@ export const CvIcons = {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="stroke-white"
+      {...props}
     >
       <circle cx="9" cy="9" r="7" />
       <circle cx="15" cy="15" r="7" />
@@ -76,7 +77,7 @@ export const CvIcons = {
       ></path>
     </svg>
   ),
-  skills: () => (
+  skills: (props: iconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -88,6 +89,7 @@ export const CvIcons = {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="stroke-white"
+      {...props}
     >
       <path d="m2 2 8 8" />
       <path d="m22 2-8 8" />
@@ -98,7 +100,7 @@ export const CvIcons = {
       <path d="M2 9v8a10 5 0 0 0 20 0V9" />
     </svg>
   ),
-  about: () => (
+  about: (props: iconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -110,12 +112,13 @@ export const CvIcons = {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="stroke-white"
+      {...props}
     >
       <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
       <path d="m9 9.5 2 2 4-4" />
     </svg>
   ),
-  experience: () => (
+  experience: (props: iconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -127,6 +130,7 @@ export const CvIcons = {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="stroke-white"
+      {...props}
     >
       <path d="M6 18h8" />
       <path d="M3 22h18" />
@@ -136,7 +140,7 @@ export const CvIcons = {
       <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" />
     </svg>
   ),
-  introduction: () => (
+  introduction: (props: iconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -148,11 +152,12 @@ export const CvIcons = {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="stroke-white"
+      {...props}
     >
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
   ),
-  education: () => (
+  education: (props: iconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -164,12 +169,13 @@ export const CvIcons = {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="stroke-white"
+      {...props}
     >
       <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
       <path d="M6 12v5c3 3 9 3 12 0v-5" />
     </svg>
   ),
-  projects: () => (
+  projects: (props: iconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -181,6 +187,7 @@ export const CvIcons = {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="stroke-white"
+      {...props}
     >
       <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
     </svg>
@@ -255,7 +262,7 @@ export const CvIcons = {
       <circle cx="4" cy="4" r="2" />
     </svg>
   ),
-  edit: () => (
+  edit: (props?: iconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -267,6 +274,7 @@ export const CvIcons = {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="stroke-white"
+      {...props}
     >
       <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
       <path d="m15 5 4 4" />

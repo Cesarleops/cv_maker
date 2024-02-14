@@ -7,12 +7,12 @@ import { useCvActions } from "@/app/hooks/useCvActions";
 
 export const GoBack = () => {
   const router = useRouter();
-  const { stopEditing } = useCvActions();
+  const { goBack } = useCvActions();
   return (
     <button
       className="p-2 rounded-full bg-terciary"
       onClick={() => {
-        stopEditing();
+        goBack();
         router.back();
       }}
     >

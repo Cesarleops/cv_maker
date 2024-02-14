@@ -13,7 +13,7 @@ export const subtitle = (section: string) => {
   }
 
   if (section === "links") {
-    return "Contact Info, if you are not familiar with some of these, leave it blank.";
+    return "Contact Info, if you are not familiar with some of these, leave them blank. If you want to change one, just add it again.";
   }
 
   if (section === "skills") {
@@ -26,6 +26,10 @@ export const subtitle = (section: string) => {
 
   if (section === "education") {
     return "How did you get your knowledge";
+  }
+
+  if (section === "projects") {
+    return "Your best works. (you can delete a tool by clicking it)";
   }
 
   return "";

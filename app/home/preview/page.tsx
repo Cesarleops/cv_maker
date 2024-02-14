@@ -1,40 +1,40 @@
 "use client";
 
-import { DescriptionType } from "@/app/components/curriculum/description";
-import { EducationType } from "@/app/components/curriculum/education";
-import { ExperienceType } from "@/app/components/curriculum/experience";
-import { ProjectsType } from "@/app/components/curriculum/projects";
-import { SkillsType } from "@/app/components/curriculum/skills";
+import { EducationPreview } from "@/app/components/education/preview";
+import { ExperiencePreview } from "@/app/components/experience/preview";
+import { ProjectsPreview } from "@/app/components/projects/preview";
+import { SkillsPreview } from "@/app/components/skills/preview";
 import { CvLinks } from "@/app/components/ui/cv-links";
 import { useCvContext } from "@/app/context/store";
 
 export default function Preview() {
   const { cvData } = useCvContext();
+
   const generatePdfFromCv = () => {
     document.title = `${cvData.name} curriculum`;
     window.print();
   };
-  //#eee
   return (
     <section className="w-screen flex flex-col items-center min-h-screen bg-[#ffffff] pb-5 px-5 ">
-      <div className="py-10 flex flex-col gap-8 max-w-2xl">
+      <div className="py-10 flex flex-col gap-8 max-w-2xl w-full">
         <div className="flex flex-col gap-2">
           <h1 className="font-bold text-xl">{cvData.name}</h1>
-          <DescriptionType
-            preview={true}
-            type="introduction"
-            text={cvData.introduction}
-          />
+          <p className="max-w-lg text-wrap text-sm break-words">
+            {cvData.introduction}
+          </p>
+
           <CvLinks links={cvData.links} />
           <p className="text-gray-500 font-mono text-xs">{cvData.location}</p>
         </div>
 
-        <DescriptionType preview={true} type="about" text={cvData.about} />
+        <p className="max-w-lg text-pretty break-words text-sm">
+          {cvData.about}
+        </p>
 
-        <ExperienceType preview={true} experience={cvData.experience} />
-        <EducationType preview={true} academies={cvData.education} />
-        <ProjectsType preview={true} projects={cvData.projects} />
-        <SkillsType skills={cvData.skills} preview={true} />
+        <ExperiencePreview preview={true} experience={cvData.experience} />
+        <EducationPreview preview={true} academies={cvData.education} />
+        <SkillsPreview skills={cvData.skills} preview={true} />
+        <ProjectsPreview preview={true} projects={cvData.projects} />
       </div>
 
       <button

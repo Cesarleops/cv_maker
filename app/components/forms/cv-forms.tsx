@@ -1,10 +1,10 @@
-import { AboutForm } from "./about-form";
-import { EducationForm } from "./education-form";
-import { ExperienceForm } from "./experience-form";
-import { IntroductionForm } from "./introduction-form";
-import { LinksForm } from "./links-form";
-import { ProjectsForm } from "./projects-form";
-import { SkillsForm } from "./skills-form";
+import { AboutForm } from "../about/form";
+import { EducationForm } from "../education/form";
+import { ExperienceForm } from "../experience/form";
+import { IntroductionForm } from "../introduction/form";
+import { LinksForm } from "../links/form";
+import { ProjectsForm } from "../projects/form";
+import { SkillsForm } from "../skills/form";
 
 interface Props {
   section: string;

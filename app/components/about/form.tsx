@@ -8,6 +8,7 @@ import { useCvContext } from "@/app/context/store";
 
 export const AboutForm = () => {
   const inputAboutRef = useRef<HTMLTextAreaElement | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
   const {
     cvData: { about },
   } = useCvContext();
@@ -17,15 +18,15 @@ export const AboutForm = () => {
       inputAboutRef.current.value = value;
     }
   };
-  const { formAction, formState } = useCv(
-    "DESCRIPTION",
-    addToAbout,
-    "about",
-    inputAboutRef
-  );
+
+  const { formAction, formState } = useCv("DESCRIPTION", addToAbout, "about");
+
+  if (!formState.errors) {
+    formRef.current?.reset();
+  }
   return (
     <section>
-      <form className="flex flex-col gap-4" action={formAction}>
+      <form className="flex flex-col gap-4" ref={formRef} action={formAction}>
         <textarea
           ref={inputAboutRef}
           name="about"
@@ -43,13 +44,30 @@ export const AboutForm = () => {
             ))}
         </div>
         <footer className="flex gap-3">
-          <Button title="add" />
-          <button
+          <Button title="add" className="w-20">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="stroke-sections"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
+          </Button>
+          <Button
             className="p-2 flex items-center justify-center bg-sections w-[100px] rounded-xl hover:border-[1px] border-white"
             onClick={() => starEditing(about)}
+            type="button"
           >
             {CvIcons.edit()}
-          </button>
+          </Button>
         </footer>
       </form>
     </section>

@@ -24,7 +24,6 @@ export async function addName(
   form: FormData
 ) {
   const name = form.get("name");
-
   const validateName = NameSchema.safeParse({ name });
 
   if (!validateName.success) {
@@ -33,7 +32,11 @@ export async function addName(
       message: "Failed to add name",
     };
   }
-  return name;
+  console.log("nn", name);
+  console.log("prevName", prevState);
+  return {
+    name,
+  };
 }
 
 export async function addLocation(
@@ -48,7 +51,9 @@ export async function addLocation(
       message: "Check your location",
     };
   }
-  return location;
+  return {
+    location,
+  };
 }
 
 export async function addToLinks(
@@ -99,9 +104,18 @@ export async function addToSkills(
       message: "Ups",
     };
   }
+
+  if (allSkills.find((s) => s.skill === newSkill)) {
+    return {
+      errors: {
+        skills: ["Can't repeat skills"],
+      },
+      message: "ha",
+    };
+  }
+
   const itemToUpdate = allSkills.find((item) => item.id === id);
   if (itemToUpdate && isEditing) {
-    console.log("GOTTT IT", itemToUpdate);
     return {
       id: itemToUpdate.id,
       skill: newSkill,
@@ -140,7 +154,6 @@ export async function addToExperience(
 
   const itemToUpdate = allExp.find((item) => item.id === id);
   if (itemToUpdate && isEditing) {
-    console.log("GOTTT IT", itemToUpdate);
     return {
       id: itemToUpdate.id,
       role,
@@ -186,7 +199,6 @@ export async function addToEducation(
   }
   const itemToUpdate = allAcademies.find((item) => item.id === id);
   if (itemToUpdate && isEditing) {
-    console.log("GOTTT IT", itemToUpdate);
     return {
       id: itemToUpdate.id,
       academy,
@@ -266,9 +278,17 @@ export async function addToProjects(
       message: "Upps",
     };
   }
+
+  if (allProjects.find((p) => p.name === name)) {
+    return {
+      errors: {
+        name: ["Can't repeat a project name"],
+      },
+      message: "ha",
+    };
+  }
   const itemToUpdate = allProjects.find((item) => item.id === id);
   if (itemToUpdate && isEditing) {
-    console.log("GOTTT IT", itemToUpdate);
     return {
       id: itemToUpdate.id,
       name,

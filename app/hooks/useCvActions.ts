@@ -11,6 +11,7 @@ export const useCvActions = () => {
     cvField: string,
     formState: State | errorsState
   ) => {
+    console.log("d", formState);
     dispatch({
       type: typeOfPayload,
       payload: {
@@ -59,16 +60,17 @@ export const useCvActions = () => {
   };
 
   const setEditing = (sectionToEdit: string) => {
-    console.log("editare esta", cvData[sectionToEdit]);
     if (cvData[sectionToEdit].length <= 0) {
-      console.log("no tienes nada que editar");
+      console.log("Esta2");
+
       return;
     }
-
     if (cvData.editionMode.isEditing) {
+      console.log("Esta");
       stopEditing();
       return;
     }
+    console.log("emp");
     startEditing();
   };
 
@@ -86,11 +88,12 @@ export const useCvActions = () => {
     ...arr: RefObject<HTMLInputElement | HTMLTextAreaElement>[]
   ) => {
     const inputs = Array.from(arr);
-    console.log("cdcd", cvData.editionMode.editingSection);
     inputs.forEach((el) => {
       if (el.current) {
-        console.log("a", el.current.name);
-        el.current.value = cvData.editionMode.editingSection![el.current.name];
+        console.log("ee", el.current.name);
+        console.log("ex", cvData.editionMode.editingSection[el.current.name]);
+        el.current.value = cvData.editionMode.editingSection[el.current.name];
+        console.log("psss");
       }
     });
   };
@@ -106,6 +109,51 @@ export const useCvActions = () => {
       type: "EDIT_LOCATION",
     });
   };
+
+  const setDeleting = () => {
+    if (cvData.editionMode.isDeleting) {
+      dispatch({
+        type: "SET_DELETING",
+        payload: false,
+      });
+    } else {
+      dispatch({
+        type: "SET_DELETING",
+        payload: true,
+      });
+    }
+  };
+
+  const goBack = () => {
+    dispatch({
+      type: "SET_DELETING",
+      payload: false,
+    });
+    stopEditing();
+  };
+
+  const modfifyField = (
+    section: string,
+    item: Project | Academy | Exp | Skill
+  ) => {
+    if (cvData.editionMode.isDeleting) {
+      dispatch({
+        type: "DELETE",
+        payload: {
+          section,
+          data: item.id,
+        },
+      });
+    } else if (cvData.editionMode.isEditing) {
+      dispatch({
+        type: "ITEM_TO_UPDATE",
+        payload: {
+          data: item,
+        },
+      });
+    }
+  };
+
   return {
     cvData,
     addNewDataToCurriculum,
@@ -113,8 +161,10 @@ export const useCvActions = () => {
     setEditing,
     obtainFieldsFromEditingItem,
     itemToUpdate,
-    stopEditing,
     editName,
     editLocation,
+    setDeleting,
+    modfifyField,
+    goBack,
   };
 };

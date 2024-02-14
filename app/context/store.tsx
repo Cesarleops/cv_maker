@@ -8,7 +8,7 @@ interface ContextProps {
   cvData: State;
   dispatch: React.Dispatch<any>;
 }
-const initialState: State = {
+export const initialState: State = {
   name: "",
   location: "",
   introduction: "",
@@ -26,6 +26,7 @@ const initialState: State = {
   editionMode: {
     isEditing: false,
     editingSection: null,
+    isDeleting: false,
   },
 };
 
@@ -33,6 +34,17 @@ const CvContext = createContext({} as ContextProps);
 
 export const CvProvider = ({ children }: { children: React.ReactNode }) => {
   const [cvData, dispatch] = useReducer(cvReducer, initialState);
+
+  useEffect(() => {
+    dispatch({
+      type: "SAVE",
+      payload: {
+        data:
+          JSON.parse(window.localStorage.getItem("cv") as string) ||
+          initialState,
+      },
+    });
+  }, []);
 
   return (
     <CvContext.Provider value={{ cvData, dispatch }}>

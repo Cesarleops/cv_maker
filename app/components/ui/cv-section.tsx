@@ -40,7 +40,7 @@ export const CvSection = ({
     <Link
       href={`/home/${title.toLocaleLowerCase()}`}
       className={cn(
-        "relative group flex flex-col  bg-sections  w-[278px] p-5 rounded-[10px] gap-5 hover:border-[1px] hover:border-pink-500",
+        "relative group flex flex-col  bg-sections  w-[278px] p-5 rounded-[10px] gap-5 hover:border-[1px] hover:scale-105 duration-150 transition-transform",
         className
       )}
     >

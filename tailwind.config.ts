@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -19,15 +20,27 @@ const config: Config = {
         terciary: "#e9eaec",
         sections: "#1B1B1E",
         titles: "#FBFBFB",
+        borders: "#e5e7eb",
       },
       keyframes: {
         appear: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        slidetop: {
+          "0%": {
+            opacity: "0",
+            top: "0px",
+          },
+          "100%": {
+            opacity: "1",
+            top: "10px",
+          },
+        },
       },
       animation: {
         appear: "appear 0.3s ease-in",
+        // slidetop: "slidetop 0.3s ease-in",
       },
     },
   },

@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { CvIcons } from "./cv-icons";
 import { adjustedTitle } from "@/app/lib/helpers";
 import { GoBack } from "./go-back";
 

@@ -2,10 +2,19 @@ import { useCvActions } from "@/app/hooks/useCvActions";
 
 export const ActiveEditing = () => {
   const { cvData } = useCvActions();
-  console.log("es", cvData.editionMode.isEditing);
-  return cvData.editionMode.isEditing ? (
-    <footer className="p-5 rounded-xl bg-sections text-green-500 font-mono">
-      Please select the item that you want to edit
-    </footer>
-  ) : null;
+
+  if (cvData.editionMode.isDeleting) {
+    return (
+      <footer className="p-5 rounded-xl bg-titles text-red-500 font-normal">
+        Please select the item that you want to delete
+      </footer>
+    );
+  }
+
+  if (cvData.editionMode.isEditing)
+    return (
+      <footer className="p-5 rounded-xl bg-titles text-green-500 font-normal appear">
+        Please select the item that you want to edit
+      </footer>
+    );
 };

@@ -1,20 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { AppInput } from "../ui/input";
 import { useCv } from "@/app/hooks/useCv";
 import { addToProjects } from "@/app/lib/actions";
 import { Button } from "../ui/button";
-import { CvIcons } from "../ui/cv-icons";
 import { useCvActions } from "@/app/hooks/useCvActions";
+import { CvControls } from "../ui/cv-controls";
 
 export const ProjectsForm = () => {
   const [techStack, setTechStack] = useState<string[]>([]);
   const projectNameInput = useRef<HTMLInputElement | null>(null);
   const projectDescriptionInput = useRef<HTMLTextAreaElement | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const {
     obtainFieldsFromEditingItem,
-    setEditing,
     cvData: { editionMode, projects },
   } = useCvActions();
   const addToProjectsWithStack = addToProjects.bind(
@@ -27,9 +28,7 @@ export const ProjectsForm = () => {
   const { formAction, formState } = useCv(
     "LISTED_INFO",
     addToProjectsWithStack,
-    "projects",
-    projectDescriptionInput,
-    projectNameInput
+    "projects"
   );
   const [projectStackInput, setProjectStackInput] = useState("");
   const [stackError, setStackError] = useState({
@@ -57,19 +56,37 @@ export const ProjectsForm = () => {
     setProjectStackInput("");
   };
 
+  const handleDeleteTech = (name: string) => {
+    setTechStack((currentStack) => {
+      return currentStack.filter((t) => t !== name);
+    });
+  };
+  useEffect(() => {
+    if (editionMode.editingSection) {
+      setTechStack((prevTechStack) => {
+        const newTechStack = editionMode.editingSection.tech || [];
+        return newTechStack;
+      });
+    }
+  }, [editionMode.editingSection]);
+
   useEffect(() => {
     if (editionMode.editingSection) {
       obtainFieldsFromEditingItem(projectDescriptionInput, projectNameInput);
-      setTechStack(editionMode.editingSection.tech);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editionMode.editingSection]);
+  }, [techStack]);
+
+  if (!formState.errors) {
+    formRef.current?.reset();
+  }
+
   return (
     <section>
       <form
         className="flex flex-col gap-4"
         action={formAction}
         onSubmit={() => setTechStack([])}
+        ref={formRef}
       >
         <label className="flex flex-col font-bold gap-2">
           <p className="font-bold text-titles">Project Name</p>
@@ -102,7 +119,23 @@ export const ProjectsForm = () => {
               className="max-w-[200px]"
               aria-describedby="tech-error"
             />
-            <Button title="+" onClick={handleAddTech} />
+            <Button title="add" className="w-20" onClick={handleAddTech}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="stroke-sections"
+              >
+                <path d="M5 12h14" />
+                <path d="M12 5v14" />
+              </svg>
+            </Button>
           </div>
           {stackError.message.length > 0 && (
             <p
@@ -117,7 +150,11 @@ export const ProjectsForm = () => {
           <ul className="flex flex-wrap gap-3 p-2 max-w-md">
             {techStack &&
               techStack.map((t) => (
-                <li className="rounded-xl bg-pink-500 p-2 text-white" key={t}>
+                <li
+                  className="rounded-xl bg-titles p-2 text-sections hover:border-red-500 hover:border-2 hover:scale-105"
+                  key={t}
+                  onClick={() => handleDeleteTech(t)}
+                >
                   {t}
                 </li>
               ))}
@@ -141,16 +178,7 @@ export const ProjectsForm = () => {
               ))}
           </div>
         </label>
-        <footer className="flex gap-3">
-          <Button title="add" />
-          <button
-            className="p-2 flex items-center justify-center bg-sections w-[100px] rounded-xl hover:border-[1px] border-white"
-            onClick={() => setEditing("projects")}
-            type="button"
-          >
-            {CvIcons.edit()}
-          </button>
-        </footer>
+        <CvControls section="projects" />
       </form>
     </section>
   );
