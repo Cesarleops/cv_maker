@@ -18,7 +18,6 @@ export const cvReducer = (state: State, { payload, type }: Action) => {
     };
   }
   if (type === "DESCRIPTION") {
-    console.log("p", payload.data);
     if (payload.data.name) {
       const newState = {
         ...state,

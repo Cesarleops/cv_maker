@@ -84,7 +84,7 @@ export type Action =
   | {
       type: "DESCRIPTION";
       payload: {
-        data: string;
+        data: any;
         section: string;
       };
     }
