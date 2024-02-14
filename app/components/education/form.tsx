@@ -41,6 +41,7 @@ export const EducationForm = () => {
         titleInputRef
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editionMode.editingSection]);
 
   if (!formState.errors) {

@@ -31,6 +31,7 @@ export const SkillsForm = () => {
     if (editionMode.editingSection) {
       obtainFieldsFromEditingItem(skillRef);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editionMode.editingSection]);
 
   if (!formState.errors) {
