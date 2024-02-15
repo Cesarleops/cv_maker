@@ -279,7 +279,7 @@ export async function addToProjects(
     };
   }
 
-  if (allProjects.find((p) => p.name === name)) {
+  if (!isEditing && allProjects.find((p) => p.name === name)) {
     return {
       errors: {
         name: ["Can't repeat a project name"],

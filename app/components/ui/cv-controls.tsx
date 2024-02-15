@@ -4,8 +4,7 @@ import { CvIcons } from "./cv-icons";
 import { cn } from "@/app/lib/utils";
 
 export const CvControls = ({ section }: { section: string }) => {
-  const { setEditing, setDeleting, cvData, obtainFieldsFromEditingItem } =
-    useCvActions();
+  const { setEditing, setDeleting, cvData } = useCvActions();
 
   return (
     <footer className="flex gap-3 items-center">
