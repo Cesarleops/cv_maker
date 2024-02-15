@@ -23,7 +23,9 @@ export const ProjectsPreview = ({
       preview={preview}
       title="Projects"
       instruction="projects"
-      className=" print:mt-40"
+      className={cn({
+        " print:mt-40": projects.length > 3,
+      })}
     >
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 ">
         {projects.map((project) => (
