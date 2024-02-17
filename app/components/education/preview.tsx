@@ -15,7 +15,6 @@ export const EducationPreview = ({
 }) => {
   const { cvData, modfifyField } = useCvActions();
   console.log(cvData);
-  console.log("P", preview);
   if (cvData.education.length === 0 && preview) {
     return <EmptyInfo title="Education" />;
   }
@@ -40,7 +39,7 @@ export const EducationPreview = ({
                 <span>{ac.startDate}</span> - <span>{ac.endDate}</span>
               </p>
             </div>
-            <p className="text-gray-500">{ac.title}</p>
+            <p className="text-gray-500 text-sm">{ac.title}</p>
           </div>
         ))}
       </article>

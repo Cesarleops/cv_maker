@@ -23,9 +23,7 @@ export const ProjectsPreview = ({
       preview={preview}
       title="Projects"
       instruction="projects"
-      className={cn({
-        " print:mt-40": projects.length > 3,
-      })}
+      className={""}
     >
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 ">
         {projects.map((project) => (
@@ -55,7 +53,7 @@ export const ProjectsPreview = ({
             <ul className="flex flex-wrap max-w-sm gap-2 ">
               {project.tech.map((t) => (
                 <li
-                  className="p-2 rounded-xl bg-[#f3f4f6] font-mono text-xs"
+                  className="rounded-lg border-[1px] border-solid  border-[#e5e7eb] p-2 text-xs"
                   key={t}
                 >
                   {t}

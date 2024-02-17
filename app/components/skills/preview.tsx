@@ -24,7 +24,7 @@ export const SkillsPreview = ({
       title="Skills"
       instruction="skills"
     >
-      <ul className="flex gap-4 items-center pt-2 flex-wrap max-w-lg">
+      <ul className="flex gap-4 items-center pt-2 flex-wrap max-w-2xl">
         {skills.map((s) => (
           <li
             onClick={() => modfifyField("skills", s)}

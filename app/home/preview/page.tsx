@@ -16,18 +16,19 @@ export default function Preview() {
   };
   return (
     <section className="w-screen flex flex-col items-center min-h-screen bg-[#ffffff] pb-5 px-5 ">
-      <div className="py-10 flex flex-col gap-8 max-w-2xl w-full">
+      <div className="py-10 flex flex-col gap-3 max-w-2xl w-full">
         <div className="flex flex-col gap-2">
-          <h1 className="font-bold text-xl">{cvData.name}</h1>
-          <p className="max-w-lg text-wrap text-sm break-words">
+          <h1 className="font-bold text-2xl">{cvData.name}</h1>
+          <p className="text-gray-500 font-mono text-sm">{cvData.location}</p>
+
+          <p className="max-w-lg text-wrap text-md break-words">
             {cvData.introduction}
           </p>
 
           <CvLinks links={cvData.links} />
-          <p className="text-gray-500 font-mono text-xs">{cvData.location}</p>
         </div>
 
-        <p className="max-w-lg text-pretty break-words text-sm">
+        <p className="max-w-lg text-pretty break-words text-md">
           {cvData.about}
         </p>
 

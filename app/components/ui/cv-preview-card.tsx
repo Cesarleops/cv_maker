@@ -15,9 +15,9 @@ export const CvPreviewCard = ({
   instruction?: string;
 }) => {
   return (
-    <div className="w-full  flex flex-col h-fit gap-5">
+    <div className={cn("w-full flex flex-col h-fit gap-5", className)}>
       <section
-        className={cn("bg-[#fff] h-fit", className, {
+        className={cn("bg-[#fff] h-fit", {
           "rounded-none shadow-none px-0 py-0 w-auto ": preview,
           "shadow-md px-10 py-5 rounded-xl bg-radial-alt point-size": !preview,
         })}

@@ -47,7 +47,7 @@ export const ExperiencePreview = ({
                 {exp.startDate} - {exp.endDate}
               </p>
             </header>
-            <p className="font-normal text-xs text-gray-500 text-pretty max-w-lg break-words">
+            <p className="font-normal text-sm text-gray-500 text-pretty max-w-xl break-words">
               {exp.description}
             </p>
           </div>
